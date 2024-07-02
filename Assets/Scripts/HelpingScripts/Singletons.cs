@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Singletons<T> : MonoBehaviour where T:MonoBehaviour
 {
-    public static T Singletone;
+    public static T Singleton;
     private void Awake()
     {
-        if (Singletone == null)
-            Singletone = this as T;
+        if (Singleton == null)
+            Singleton = this as T;
         else
             Destroy(this);
     }

@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 155521875}
   - component: {fileID: 155521874}
   - component: {fileID: 155521873}
-  - component: {fileID: 155521877}
   m_Layer: 0
   m_Name: ScreensSeperator
   m_TagString: Untagged
@@ -152,7 +151,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155521872}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -220,22 +219,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &155521877
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155521872}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &155521878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productsPrefab: {fileID: 4598406898747206998, guid: 999222d425a491b4180587bf8299763e, type: 3}
   cardsParent: {fileID: 418252300}
-  cardsSprits:
+  cardsSprites:
   - {fileID: -6555575649291838755, guid: b2f8b3ff2e1ec0d41803468bee6e47db, type: 3}
   - {fileID: -1636742031616846006, guid: b2f8b3ff2e1ec0d41803468bee6e47db, type: 3}
   - {fileID: -7557494978891415441, guid: b2f8b3ff2e1ec0d41803468bee6e47db, type: 3}
@@ -489,7 +472,7 @@ MonoBehaviour:
   - {fileID: 4463306761968048449, guid: b2f8b3ff2e1ec0d41803468bee6e47db, type: 3}
   - {fileID: 2963559230854855473, guid: b2f8b3ff2e1ec0d41803468bee6e47db, type: 3}
   cardsNames:
-  - A
+  - Ace
   - 2
   - 3
   - 4
@@ -499,9 +482,9 @@ MonoBehaviour:
   - 8
   - 9
   - 10
-  - J
-  - Q
-  - K
+  - Jack
+  - Queen
+  - King
   productsInformation:
   - Hello! I am a product and this is my information
   - Hello! I am a product and this is my information
@@ -599,7 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 450256149}
   m_Layer: 0
-  m_Name: Diamons
+  m_Name: Diamonds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -847,6 +830,7 @@ Transform:
   m_Children:
   - {fileID: 382159662}
   - {fileID: 1053133891}
+  - {fileID: 1294907485}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -976,12 +960,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7da9db18b7edc545a999b0098521ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardsSpeed: 3
-  scalingDownSpeed: 0.5
-  minSpawnWait: 0.3
-  maxSpawnWait: 0.6
+  cardsSpeed: 7
+  scalingDownSpeed: 1.3
+  bottomScreenSize: 0.55
+  minSpawnWait: 0.1
+  maxSpawnWait: 0.2
   minX: -2.26
   maxX: 3.37
+  cardKeepFactor: 4
+  cardLifeTime: {x: 12, y: 20}
+--- !u!1 &1294907484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294907485}
+  - component: {fileID: 1294907486}
+  m_Layer: 0
+  m_Name: ClickManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1294907485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294907484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 949415160}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294907486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294907484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4687693f2bf0b045b3937237b3fb55e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomCamera: {fileID: 860640252}
 --- !u!1 &1497213622
 GameObject:
   m_ObjectHideFlags: 0

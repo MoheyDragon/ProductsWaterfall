@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 public class Product : MonoBehaviour
 {
     int localIndex;
@@ -26,6 +24,10 @@ public class Product : MonoBehaviour
     }
     public void ReturnToList()
     {
-        CardsSpawner.Singletone.ReturnProductToList(typeIndex, this);
+        CardsSpawner.Singleton.ReturnProductToList(typeIndex, this);
+    }
+    public void OnClick()
+    {
+        print(information+ ", "+name);
     }
 }

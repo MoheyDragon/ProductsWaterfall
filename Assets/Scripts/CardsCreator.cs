@@ -7,61 +7,67 @@ public class CardsCreator : MonoBehaviour
     [SerializeField] Product productsPrefab;
     [SerializeField] Transform cardsParent;
     [Space]
-    [SerializeField] Sprite[] cardsSprits;
+    [SerializeField] Sprite[] cardsSprites;
+    [SerializeField] string[] cardsNames;
     [SerializeField] string[] productsInformation;
     CardType[] cards;
-    int currentCardIndex = 0;
+
+    int globalCardIndex = 0;
+    
     private void Awake()
     {
         InitiateProperties();
         InstantiateProducts();
-        CardsSpawner.Singletone.SetCards(cards);
+
+        CardsSpawner.Singleton.SetCards(cards);
     }
+
     private void InitiateProperties()
     {
         cards = new CardType[4];
         for (int i = 0; i < 4; i++)
         {
-            cards[i]=new CardType();
+            cards[i] = new CardType();
             cards[i].cards = new List<Product>();
         }
-        spacing =Vector3.up* - 1.13f;
     }
     private void InstantiateProducts()
     {
-        for (int i = 0; i < 4; i++)
+        for (int houseIndex = 0; houseIndex < 4; houseIndex++)
         {
-            for (int j = 0; j < 13; j++)
+            for (int cardIndex = 0; cardIndex < 13; cardIndex++)
             {
-                CreateProduct(i,j);
+                CreateProduct(houseIndex, cardIndex);
             }
-            currentNewCardPosition = Vector3.zero;
-        }    
+        }
     }
-    Vector3 currentNewCardPosition;
-    Vector3 spacing;
-    private void CreateProduct(int cardsType,int cardIndex)
+    private void CreateProduct(int houseIndex, int cardIndex)
     {
-        Product product = Instantiate(productsPrefab, cardsParent.GetChild(cardsType)).GetComponent<Product>();
-        product.transform.localPosition = currentNewCardPosition;
-        Card cardInfo = new Card(cardIndex, currentCardIndex,cardsType, GetCardName(cardIndex.ToString()),
-            productsInformation[currentCardIndex], cardsSprits[currentCardIndex]);
-        product.SetupCard(cardInfo);
-        cards[cardsType].cards.Add(product);
-        currentCardIndex++;
-        currentNewCardPosition += spacing;
-    }
-    private string GetCardName(string index)
-    {
-        index = index switch
-        {
-            "0" => "A",
-            "10" => "J",
-            "11" => "Q",
-            "12" => "K",
-            _ => index
-        };
-        return index.ToString();
-    }
+        //creating and setting postion
+        Product product = Instantiate(productsPrefab, cardsParent.GetChild(houseIndex)).GetComponent<Product>();
 
+        //implementing data to my card
+        string cardName = cardsNames[cardIndex];
+        string cardDescription = productsInformation[globalCardIndex];
+        Sprite cardImageSprite = cardsSprites[globalCardIndex];
+        Card cardInfo = new Card(cardIndex, globalCardIndex, houseIndex, cardName, cardDescription, cardImageSprite);
+
+        product.SetupCard(cardInfo);
+        cards[houseIndex].cards.Add(product);
+
+        globalCardIndex++;
+    }
+    private string GetCardName(int index)
+    {
+        string name = index switch
+        {
+            0 => "Ace",
+            7 => "Lucky Seven",
+            10 => "Jack",
+            11 => "Queen",
+            12 => "King",
+            _ => index.ToString()
+        };
+        return name;
+    }
 }

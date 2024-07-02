@@ -5,7 +5,7 @@ public class ScreensSeperator : MonoBehaviour
     Vector3 scalingDownSpeed;
     private void Start()
     {
-        scalingDownSpeed = CardsSpawner.Singletone.GetScalingSpeed();
+        scalingDownSpeed = CardsSpawner.Singleton.GetScalingSpeed();
     }
     private void OnTriggerEnter(Collider other)
     {

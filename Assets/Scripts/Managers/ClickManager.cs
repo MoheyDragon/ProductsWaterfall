@@ -1,9 +1,8 @@
 using UnityEngine;
-
 public class ClickManager : MonoBehaviour
 {
     [SerializeField] Camera bottomCamera;
-    string clickableTag = "Clickable";
+    string productTag = "Product";
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) 
@@ -13,8 +12,11 @@ public class ClickManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.transform.CompareTag(clickableTag))
-                    hit.transform.GetComponent<Product>().OnClick();
+                if(hit.transform.CompareTag(productTag))
+                {
+                    Product product = hit.transform.GetComponent<Product>();
+                    InformationWindow.Singleton.ShowInfo(product);
+                }
             }
         }
     }

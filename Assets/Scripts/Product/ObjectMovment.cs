@@ -27,8 +27,8 @@ public class ObjectMovment : MonoBehaviour
         product = GetComponent<Product>();
         rigidbody = GetComponent<Rigidbody>();
         keepChance = CardsSpawner.Singleton.GetKeepChance();
-        minLifeTime = CardsSpawner.Singleton.GetMinMaxLifeTime().x;
-        maxLifeTime = CardsSpawner.Singleton.GetMinMaxLifeTime().y;
+        minLifeTime = CardsSpawner.Singleton.GetMinMaxLifeTime().Min;
+        maxLifeTime = CardsSpawner.Singleton.GetMinMaxLifeTime().Max;
         sizeInBottomScreen = CardsSpawner.Singleton.GetSizeInBottomScreen();
         ResetFunction = nameof(ResetCard);
     }

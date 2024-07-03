@@ -10,7 +10,7 @@ public class CardsCreator : MonoBehaviour
     [SerializeField] Sprite[] cardsSprites;
     [SerializeField] string[] cardsNames;
     [SerializeField] string[] productsInformation;
-    CardType[] cards;
+    CardHouse[] cardHouses;
 
     int globalCardIndex = 0;
     
@@ -18,17 +18,19 @@ public class CardsCreator : MonoBehaviour
     {
         InitiateProperties();
         InstantiateProducts();
-
-        CardsSpawner.Singleton.SetCards(cards);
+    }
+    private void Start()
+    {
+        CardsSpawner.Singleton.SetCards(cardHouses);
     }
 
     private void InitiateProperties()
     {
-        cards = new CardType[4];
+        cardHouses = new CardHouse[4];
         for (int i = 0; i < 4; i++)
         {
-            cards[i] = new CardType();
-            cards[i].cards = new List<Product>();
+            cardHouses[i] = new CardHouse();
+            cardHouses[i].cards = new List<Product>();
         }
     }
     private void InstantiateProducts()
@@ -53,7 +55,7 @@ public class CardsCreator : MonoBehaviour
         Card cardInfo = new Card(cardIndex, globalCardIndex, houseIndex, cardName, cardDescription, cardImageSprite);
 
         product.SetupCard(cardInfo);
-        cards[houseIndex].cards.Add(product);
+        cardHouses[houseIndex].cards.Add(product);
 
         globalCardIndex++;
     }

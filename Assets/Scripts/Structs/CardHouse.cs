@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-public class CardType
+public struct CardHouse
 {
     public List<Product> cards;
 }

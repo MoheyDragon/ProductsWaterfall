@@ -15,8 +15,9 @@ public class CardsSpawner : Singletons<CardsSpawner>
     [SerializeField] float maxX= 3.37f;
     [Space]
     [SerializeField] int cardKeepFactor;
-    [SerializeField] Vector2 cardLifeTime;
-    CardType[] m_cards;
+    [SerializeField] Range cardLifeTime;
+    [SerializeField] Vector2 life;
+    CardHouse[] cardHouses;
     string spawnCardFunction;
     private void Start()
     {
@@ -25,19 +26,19 @@ public class CardsSpawner : Singletons<CardsSpawner>
     }
     public void SpawnCard()
     {
-        int typeIndex = Random.Range(0, 4);
-        int cardsAvailable = m_cards[typeIndex].cards.Count;
+        int houseIndex = Random.Range(0, 4);
+        int cardsAvailable = cardHouses[houseIndex].cards.Count;
         if(cardsAvailable>0)
         {
-            Product spawnedProduct = m_cards[typeIndex].cards[Random.Range(0, cardsAvailable)];
+            Product spawnedProduct = cardHouses[houseIndex].cards[Random.Range(0, cardsAvailable)];
             LaunchCard(spawnedProduct);
-            m_cards[typeIndex].cards.Remove(spawnedProduct);
+            cardHouses[houseIndex].cards.Remove(spawnedProduct);
         }
         Invoke(spawnCardFunction, Random.Range(minSpawnWait,maxSpawnWait));
     }
     public void ReturnProductToList(int type,Product card)
     {
-        m_cards[type].cards.Add(card);
+        cardHouses[type].cards.Add(card);
     }
     private void LaunchCard(Product spawnedProduct)
     {
@@ -46,12 +47,12 @@ public class CardsSpawner : Singletons<CardsSpawner>
         spawnedProduct.transform.position = newPosition;
         spawnedProduct.StartMoving(cardsSpeed);
     }
-    public void SetCards(CardType[] p_cards)
+    public void SetCards(CardHouse[] p_cards)
     {
-        m_cards = p_cards;
+        cardHouses = p_cards;
     }
     public Vector3 GetScalingSpeed() => Vector3.one * scalingDownSpeed;
     public Vector3 GetSizeInBottomScreen() => Vector3.one * bottomScreenSize;
     public int GetKeepChance() => cardKeepFactor;
-    public Vector2 GetMinMaxLifeTime() => cardLifeTime;
+    public Range GetMinMaxLifeTime() => cardLifeTime;
 }

@@ -49,7 +49,7 @@ public class CardsCreator : MonoBehaviour
         Product product = Instantiate(productsPrefab, cardsParent.GetChild(houseIndex)).GetComponent<Product>();
 
         //implementing data to my card
-        string cardName = cardsNames[cardIndex];
+        string cardName = cardsNames[cardIndex]+ " of "+(House)houseIndex;
         string cardDescription = productsInformation[globalCardIndex];
         Sprite cardImageSprite = cardsSprites[globalCardIndex];
         Card cardInfo = new Card(cardIndex, globalCardIndex, houseIndex, cardName, cardDescription, cardImageSprite);
@@ -73,3 +73,4 @@ public class CardsCreator : MonoBehaviour
         return name;
     }
 }
+public enum House { Spades, Clubs, Diamonds,Hearts}
